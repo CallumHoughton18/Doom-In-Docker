@@ -113,3 +113,5 @@ dist
 .yarn/unplugged
 .yarn/build-state.yml
 .yarn/in
+doom/.DS_Store
+.DS_Store
