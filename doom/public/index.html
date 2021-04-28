@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>js-dos 6.22</title>
+  <script src="js-dos.js"></script>
+  <style>
+    canvas {
+      width: 80%;
+      height: 80vh;
+      margin-left: 5px;
+      margin-right: 5px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    html {
+      background-color: darkgray;
+      background: url(https://wallpapercave.com/wp/wp2343919.jpg) no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      height:100vh;
+    }
+    html, body {
+      height: 100vh;
+    }
+    button {
+      padding-left: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <button onclick="ci.fullscreen()">Fullscreen</button>
+  <button onclick="ci.exitFullscreen()">Exit fullscreen</button>
+  <canvas id="jsdos"></canvas>
+  <script>
+    Dos(document.getElementById("jsdos")).ready((fs, main) => {
+      fs.createFile("dosbox.conf", `
+            [sdl]
+            autolock=true
+        `);
+      fs.extract("doom-box.zip").then(() => {
+        main(["-conf", "dosbox.conf", "-c", "DOOM.BAT"]).then((ci) => {
+            window.ci = ci;
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
